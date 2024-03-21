@@ -32,7 +32,7 @@ document.getElementById("src").addEventListener("input", function (e) {
     const str = e.target.value;
     let result = "";
 
-    for (i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
         if (m[str[i]] !== undefined) {
             result += m[str[i]]
         } else {
