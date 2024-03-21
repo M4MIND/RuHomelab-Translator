@@ -15,11 +15,11 @@ const m = {
     "Ь": "M", "Б": "<", "Ю": ">", "ё": "`", "Ё": "~", "`": "ё", "~": "Ё",
 };
 
-document.getElementById("copy").addEventListener('click', function (e) {
+document.getElementById("copy").addEventListener('click', function () {
     const str = document.getElementById('out').value;
     navigator.clipboard.writeText(str).then(e => {
         document.getElementById("spn").innerHTML = "Скопировано!"
-    }).catch(e => {
+    }).catch(() => {
         document.getElementById("spn").innerHTML = "Ошибка при копировании!"
     })
 
