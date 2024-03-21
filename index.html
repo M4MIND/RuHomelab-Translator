@@ -1,0 +1,168 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+        :root {
+            --base00: #282c34;
+            /* Default Background */
+            --base01: #353b45;
+            /* Lighter Background */
+            --base02: #3e4451;
+            /* Selection Background */
+            --base03: #545862;
+            /* Comments, Invisibles, Line Highlighting */
+            --base04: #565c64;
+            /* Dark Foreground (Used for status bars) */
+            --base05: #abb2bf;
+            /* Default Foreground, Caret, Delimiters, Operators */
+            --base06: #b6bdca;
+            /* Light Foreground (Not often used) */
+            --base07: #c8ccd4;
+            /* Light Background (Not often used) */
+            --base08: #e06c75;
+            /* Red */
+            --base09: #d19a66;
+            /* Orange */
+            --base0A: #e5c07b;
+            /* Yellow */
+            --base0B: #98c379;
+            /* Green */
+            --base0C: #56b6c2;
+            /* Aqua */
+            --base0D: #61afef;
+            /* Blue */
+            --base0E: #c678dd;
+            /* Purple */
+            --base0F: #be5046;
+            /* Dark red */
+        }
+
+        * {
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            color: var(--base05);
+        }
+
+        html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        body {
+            background-color: #282c34;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            max-width: 1280px;
+            text-align: center;
+        }
+
+        header {
+            text-align: right;
+            padding: 0.5em;
+            background-color: var(--base01);
+            border-bottom: 1px solid var(--base02);
+        }
+
+        button {
+            padding: 0.5em;
+            background-color: var(--base0D);
+            cursor: pointer;
+            text-shadow: 1px 1px 1px #000;
+            border-radius: 0.25em;
+            border: 1px solid var(--base02);
+            position: fixed;
+            bottom: 1em;
+            right: 1em;
+        }
+
+        button>span {
+            filter: grayscale(1);
+            color: #fff;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-content: stretch;
+            flex-grow: 1;
+            flex-direction: column;
+        }
+
+        textarea {
+            padding: 0.5em;
+            flex-grow: 1;
+            resize: none;
+            border: 1px solid var(--base02);
+            box-shadow: none;
+            outline: none;
+            background-color: var(--base00);
+        }
+
+        @media (min-width:640px) {
+            main {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <textarea id="src" placeholder="Источник" spellcheck="false"></textarea>
+        <textarea id="out" placeholder="Результат" spellcheck="false"></textarea>
+        <button id="copy"><span id="spn">&#128203;</span></button>
+    </main>
+</body>
+
+</html>
+<script lang="js">
+    m = {
+        "q": "й", "w": "ц", "e": "у", "r": "к", "t": "е", "y": "н", "u": "г", "i": "ш", "o": "щ", "p": "з",
+        "[": "х", "]": "ъ", "a": "ф", "s": "ы", "d": "в", "f": "а", "g": "п", "h": "р", "j": "о", "k": "л",
+        "l": "д", ";": "ж", "'": "э", "z": "я", "x": "ч", "c": "с", "v": "м", "b": "и", "n": "т", "m": "ь",
+        ",": "б", ".": "ю", "/": ".", "Q": "Й", "W": "Ц", "E": "У", "R": "К", "T": "Е", "Y": "Н", "U": "Г",
+        "I": "Ш", "O": "Щ", "P": "З", "{": "Х", "}": "Ъ", "A": "Ф", "S": "Ы", "D": "В", "F": "А", "G": "П",
+        "H": "Р", "J": "О", "K": "Л", "L": "Д", ":": "Ж", "\"": "Э", "|": "/", "Z": "Я", "X": "Ч", "C": "С",
+        "V": "М", "B": "И", "N": "Т", "M": "Ь", "<": "Б", ">": "Ю", "?": ",", "й": "q", "ц": "w", "у": "e",
+        "к": "r", "е": "t", "н": "y", "г": "u", "ш": "i", "щ": "o", "з": "p", "х": "[", "ъ": "]", "ф": "a",
+        "ы": "s", "в": "d", "а": "f", "п": "g", "р": "h", "о": "j", "л": "k", "д": "l", "ж": ";", "э": "'",
+        "я": "z", "ч": "x", "с": "c", "м": "v", "и": "b", "т": "n", "ь": "m", "б": ",", "ю": ".", ".": "/",
+        "Й": "Q", "Ц": "W", "У": "E", "К": "R", "Е": "T", "Н": "Y", "Г": "U", "Ш": "I", "Щ": "O", "З": "P",
+        "Х": "{", "Ъ": "}", "Ф": "A", "Ы": "S", "В": "D", "А": "F", "П": "G", "Р": "H", "О": "J", "Л": "K",
+        "Д": "L", "Ж": ":", "Э": "\"", "/": "|", "Я": "Z", "Ч": "X", "С": "C", "М": "V", "И": "B", "Т": "N",
+        "Ь": "M", "Б": "<", "Ю": ">", "ё": "`", "Ё": "~", "`": "ё", "~": "Ё",
+    }
+
+    document.getElementById("copy").addEventListener('click', function (e) {
+        str = document.getElementById('out').value
+        navigator.clipboard.writeText(str)
+
+        document.getElementById("spn").innerHTML = "Скопировано!"
+        setTimeout(function () {
+            document.getElementById("spn").innerHTML = "&#128203";
+        }, 1000);
+    })
+
+    document.getElementById("src").addEventListener("input", function (e) {
+        var str = e.target.value;
+        var result = ""
+
+        for (i = 0; i < str.length; i++) {
+            if (m[str[i]] != undefined) {
+                result += m[str[i]]
+            } else {
+                result += str[i]
+            }
+        }
+
+        document.getElementById("out").value = result
+    })
+
+</script>
