@@ -1,0 +1,116 @@
+:root {
+    --base00: #282c34;
+    /* Default Background */
+    --base01: #353b45;
+    /* Lighter Background */
+    --base02: #3e4451;
+    /* Selection Background */
+    --base03: #545862;
+    /* Comments, Invisibles, Line Highlighting */
+    --base04: #565c64;
+    /* Dark Foreground (Used for status bars) */
+    --base05: #abb2bf;
+    /* Default Foreground, Caret, Delimiters, Operators */
+    --base06: #b6bdca;
+    /* Light Foreground (Not often used) */
+    --base07: #c8ccd4;
+    /* Light Background (Not often used) */
+    --base08: #e06c75;
+    /* Red */
+    --base09: #d19a66;
+    /* Orange */
+    --base0A: #e5c07b;
+    /* Yellow */
+    --base0B: #98c379;
+    /* Green */
+    --base0C: #56b6c2;
+    /* Aqua */
+    --base0D: #61afef;
+    /* Blue */
+    --base0E: #c678dd;
+    /* Purple */
+    --base0F: #be5046;
+    /* Dark red */
+}
+
+* {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    color: var(--base05);
+}
+
+html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+body {
+    background-color: #333333;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 1280px;
+    text-align: center;
+    font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+header {
+    text-align: left;
+    padding: 0.6em 1em;
+    background-color: var(--base01);
+    border-bottom: 1px solid var(--base02);
+    line-height: 1;
+    font-size: 24px;
+}
+
+footer {
+    padding: 1em;
+    text-align: left;
+    line-height: 1;
+}
+
+button {
+    padding: 0.5em;
+    background-color: var(--base0D);
+    cursor: pointer;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 0.25em;
+    border: 1px solid var(--base02);
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+}
+
+button>span {
+    filter: grayscale(1);
+    color: #fff;
+}
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-content: stretch;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+textarea {
+    padding: 0.5em;
+    flex-grow: 1;
+    resize: none;
+    border: 1px solid var(--base02);
+    box-shadow: none;
+    outline: none;
+    background-color: var(--base00);
+}
+
+@media (min-width:640px) {
+    main {
+        flex-direction: row;
+    }
+}
