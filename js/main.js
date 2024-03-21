@@ -17,7 +17,7 @@ const m = {
 
 document.getElementById("copy").addEventListener('click', function () {
     const str = document.getElementById('out').value;
-    navigator.clipboard.writeText(str).then(e => {
+    navigator.clipboard.writeText(str).then(() => {
         document.getElementById("spn").innerHTML = "Скопировано!"
     }).catch(() => {
         document.getElementById("spn").innerHTML = "Ошибка при копировании!"
